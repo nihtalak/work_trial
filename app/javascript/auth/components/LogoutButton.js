@@ -1,9 +1,9 @@
 import React from 'react'
 import PT from 'prop-types'
-import { Button } from 'react-bootstrap'
+import { NavItem } from 'react-bootstrap'
 
 const LogoutButton = ({ logout, removeCredentials }) => (
-  <Button bsSize="sm" type="submit" onClick={(e) => {e.preventDefault(); logout().then(removeCredentials)}}>Logout</Button>
+  <NavItem href="#" onClick={(e) => {e.preventDefault(); logout().then(removeCredentials)}}>Logout</NavItem>
 )
 
 LogoutButton.propTypes = {

@@ -6,5 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.where(email: 'vova@gmail.com').first_or_create!(password: 'pass1234', nickname: 'VO' )
-User.where(email: 'steffen@gmail.com').first_or_create!(password: 'pass1234', nickname: 'SB')
+vova = User.where(email: 'vova@gmail.com').first_or_create!(password: 'pass1234', nickname: 'VO' )
+steffen = User.where(email: 'steffen@gmail.com').first_or_create!(password: 'pass1234', nickname: 'SB')
+
+Task.where(description: 'Taste JavaScript').first_or_create!(user: steffen, performer: vova)
+Task.where(description: 'Buy a unicorn').first_or_create!(user: vova, performer: steffen)

@@ -6,23 +6,14 @@ import LoginPage from '../auth/components/LoginPage'
 import PrivateRoute from './PrivateRoute'
 import GuestRoute from './GuestRoute'
 import App from './App'
-
-import LogoutButton from '../auth/containers/LogoutButton'
-
-// TODO: move it from here
-const TasksListPage = () => (
-  <div className="text-center">
-    <h1>TasksList</h1>
-    <LogoutButton />
-  </div>
-)
+import TaskListPage from '../tasklist/components/TaskListPage'
 
 const Root = ({ store }) => (
   <Provider store={store}>
     <App>
       <Switch>
       <GuestRoute path="/login" component={LoginPage} />
-      <PrivateRoute component={TasksListPage} />
+      <PrivateRoute component={TaskListPage} />
       </Switch>
     </App>
   </Provider>

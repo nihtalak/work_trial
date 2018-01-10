@@ -14,6 +14,7 @@ import Root from '../global/Root'
 import configureStore from '../store/configureStore'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/css/bootstrap-theme.css'
+import 'react-bootstrap-table/dist/react-bootstrap-table.min.css'
 import '../main.css'
 
 const store = configureStore()

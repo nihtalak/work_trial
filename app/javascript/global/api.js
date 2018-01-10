@@ -1,5 +1,4 @@
 import { CALL_API } from 'redux-api-middleware'
-import { getCredentials } from '../auth/utils'
 
 const makeAction = (method, options) => {
   const { body, headers, types, normalize, ...rest } = options
@@ -22,12 +21,12 @@ const makeAction = (method, options) => {
         types[2]
       ],
       body: body instanceof window.FormData ? body : JSON.stringify(body),
-      headers: () => {
+      headers: (state) => {
         let defaultHeaders = {}
         if (!(body instanceof window.FormData)) {
           defaultHeaders = {'Content-Type': 'application/json', 'Accept': 'application/json'}
         }
-        const authHeaders = getCredentials()
+        const authHeaders = state.auth.authHeaders
         return {...defaultHeaders, ...authHeaders, ...headers}
       },
       method

@@ -47,9 +47,20 @@ const validated = (state = false, action) => {
   }
 }
 
+const authHeaders = (state = null, action) => {
+  switch (action.type) {
+    case 'VALIDATE_AUTH_SUCCESS':
+    case 'LOGIN_SUCCESS':
+      return action.meta
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   ui,
   attributes,
   signedIn,
-  validated
+  validated,
+  authHeaders
 })

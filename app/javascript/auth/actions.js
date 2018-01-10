@@ -25,7 +25,10 @@ const _validate = (headers) =>
     endpoint: `/api/v1/auth/validate_token?access-token=${headers['access-token']}&uid=${headers.uid}&client=${headers.client}`,
     types: [
       'VALIDATE_AUTH_REQUEST',
-      'VALIDATE_AUTH_SUCCESS',
+      {
+        type: 'VALIDATE_AUTH_SUCCESS',
+        meta: (action, state, res) => extractFromHeaders(res.headers)
+      },
       'VALIDATE_AUTH_FAILURE'
     ]
   })
