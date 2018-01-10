@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
+import auth from './auth/reducer'
 
-const dummy = (state = {}, action) => state
 
 export default combineReducers({
-  dummy
+  auth
 })

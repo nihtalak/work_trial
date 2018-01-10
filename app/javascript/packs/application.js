@@ -12,6 +12,9 @@ import { render } from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 import Root from '../global/Root'
 import configureStore from '../store/configureStore'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap-theme.css'
+import '../main.css'
 
 const store = configureStore()
 
