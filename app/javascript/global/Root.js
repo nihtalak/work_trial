@@ -1,14 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
-import { Route } from 'react-router-dom'
+import { Switch } from 'react-router-dom'
 import LoginPage from '../auth/components/LoginPage'
+import PrivateRoute from './PrivateRoute'
+import GuestRoute from './GuestRoute'
 import App from './App'
+
+// TODO: move it from here
+const TasksList = () => (
+  <div>TasksList</div>
+)
 
 const Root = ({ store }) => (
   <Provider store={store}>
     <App>
-      <Route path="/login" component={LoginPage} />
+      <Switch>
+      <GuestRoute path="/login" component={LoginPage} />
+      <PrivateRoute component={TasksList} />
+      </Switch>
     </App>
   </Provider>
 )

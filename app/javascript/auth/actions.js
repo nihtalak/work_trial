@@ -19,3 +19,15 @@ export const login = ({ email, password }) =>
       'LOGIN_FAILURE'
     ]
   })
+
+const _validate = (headers) =>
+  api.get({
+    endpoint: `/api/v1/auth/validate_token?access-token=${headers['access-token']}&uid=${headers.uid}&client=${headers.client}`,
+    types: [
+      'VALIDATE_AUTH_REQUEST',
+      'VALIDATE_AUTH_SUCCESS',
+      'VALIDATE_AUTH_FAILURE'
+    ]
+  })
+
+export const validate = (headers) => headers ? _validate(headers) : {type: 'VALIDATE_AUTH_FAILURE'}

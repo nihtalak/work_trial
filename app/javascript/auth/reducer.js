@@ -15,6 +15,7 @@ const ui = (state = {loading: false, errors: null}, action) => {
 
 const attributes = (state = {}, action) => {
   switch (action.type) {
+    case 'VALIDATE_AUTH_SUCCESS':
     case 'LOGIN_SUCCESS':
       return action.payload.data
     default:
@@ -24,7 +25,18 @@ const attributes = (state = {}, action) => {
 
 const signedIn = (state = false, action) => {
   switch (action.type) {
+    case 'VALIDATE_AUTH_SUCCESS':
     case 'LOGIN_SUCCESS':
+      return true
+    default:
+      return state
+  }
+}
+
+const validated = (state = false, action) => {
+  switch (action.type) {
+    case 'VALIDATE_AUTH_SUCCESS':
+    case 'VALIDATE_AUTH_FAILURE':
       return true
     default:
       return state
@@ -34,5 +46,6 @@ const signedIn = (state = false, action) => {
 export default combineReducers({
   ui,
   attributes,
-  signedIn
+  signedIn,
+  validated
 })
