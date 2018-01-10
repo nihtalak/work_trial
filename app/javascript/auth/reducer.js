@@ -18,6 +18,8 @@ const attributes = (state = {}, action) => {
     case 'VALIDATE_AUTH_SUCCESS':
     case 'LOGIN_SUCCESS':
       return action.payload.data
+    case 'LOGOUT_SUCCESS':
+      return {}
     default:
       return state
   }
@@ -28,6 +30,8 @@ const signedIn = (state = false, action) => {
     case 'VALIDATE_AUTH_SUCCESS':
     case 'LOGIN_SUCCESS':
       return true
+    case 'LOGOUT_SUCCESS':
+      return false
     default:
       return state
   }

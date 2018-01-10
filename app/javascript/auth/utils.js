@@ -8,3 +8,7 @@ export const getCredentials = () => {
   const headers = window.localStorage.getItem('authHeaders')
   return headers ? JSON.parse(headers) : null
 }
+
+export const removeCredentials = () => {
+  window.localStorage.removeItem('authHeaders')
+}

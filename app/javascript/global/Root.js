@@ -7,9 +7,14 @@ import PrivateRoute from './PrivateRoute'
 import GuestRoute from './GuestRoute'
 import App from './App'
 
+import LogoutButton from '../auth/containers/LogoutButton'
+
 // TODO: move it from here
-const TasksList = () => (
-  <div>TasksList</div>
+const TasksListPage = () => (
+  <div className="text-center">
+    <h1>TasksList</h1>
+    <LogoutButton />
+  </div>
 )
 
 const Root = ({ store }) => (
@@ -17,7 +22,7 @@ const Root = ({ store }) => (
     <App>
       <Switch>
       <GuestRoute path="/login" component={LoginPage} />
-      <PrivateRoute component={TasksList} />
+      <PrivateRoute component={TasksListPage} />
       </Switch>
     </App>
   </Provider>

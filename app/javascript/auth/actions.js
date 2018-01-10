@@ -31,3 +31,9 @@ const _validate = (headers) =>
   })
 
 export const validate = (headers) => headers ? _validate(headers) : {type: 'VALIDATE_AUTH_FAILURE'}
+
+export const logout = () =>
+  api.delete({
+    endpoint: '/api/v1/auth/sign_out',
+    types: ['LOGOUT_REQUEST', 'LOGOUT_SUCCESS', 'LOGOUT_FAILURE']
+  })
