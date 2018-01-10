@@ -13,7 +13,7 @@ class LoginForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.handleSubmit(this.state)
+    this.props.handleSubmit(this.state).then(this.props.saveCredentials)
   }
 
   render () {
@@ -23,7 +23,7 @@ class LoginForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         {errors && errors.length &&
-          <Alert bsStyle="danger">{errors.map((e) => <div>{e}</div>)}</Alert>
+          <Alert bsStyle="danger">{errors.map((e, i) => <div key={i}>{e}</div>)}</Alert>
         }
         <FormGroup controlId="email" bsSize="large">
           <ControlLabel>Email</ControlLabel>
@@ -42,7 +42,8 @@ class LoginForm extends React.Component {
 LoginForm.propTypes = {
   loading: PT.bool.isRequired,
   errors: PT.array,
-  handleSubmit: PT.func.isRequired
+  handleSubmit: PT.func.isRequired,
+  saveCredentials: PT.func.isRequired
 }
 
 export default LoginForm
