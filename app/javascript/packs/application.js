@@ -7,4 +7,17 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-console.log('Hello World from Webpacker')
+import React from 'react'
+import { render } from 'react-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Root from '../global/Root'
+import configureStore from '../store/configureStore'
+
+const store = configureStore()
+
+render(
+  <Router>
+    <Root store={store} />
+  </Router>,
+  document.getElementById('root')
+)
