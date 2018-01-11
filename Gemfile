@@ -31,6 +31,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise_token_auth'
 gem 'omniauth'
 
+gem 'actioncable'
+gem 'wisper'
+gem "redis", "~> 3.0"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -1,12 +1,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchTasks, destroyTask } from '../actions'
+import { fetchTasks, destroyTask, taskEvent } from '../actions'
 import TaskList from '../components/TaskList'
 import { showModal, hideModal } from '../../modal/actions'
+import ActionCable from 'actioncable'
 
 class TaskListContainer extends React.Component {
   componentDidMount() {
+    const headers = this.props.headers
+    const endpoint = `/cable?access-token=${headers['access-token']}&uid=${headers.uid}&client=${headers.client}`
+    const cable = ActionCable.createConsumer(endpoint)
+    const channelIdentifier = {channel: 'UserChannel'}
+    this.ws = cable.subscriptions.create(channelIdentifier, {
+      received: (e) => this.props.onTaskEventReceive(JSON.parse(e))
+    })
     this.props.fetchTasks()
+  }
+
+  componentWillUnmount() {
+    this.ws.unsubscribe()
   }
 
   render () {
@@ -20,8 +32,10 @@ class TaskListContainer extends React.Component {
   }
 }
 
-const mapStateToProps = ({ tasklist }) => {
+const mapStateToProps = ({ auth, tasklist }) => {
   return {
+    user: auth.attributes,
+    headers: auth.authHeaders,
     loading: tasklist.loading,
     tasks: tasklist.ids.map((id) => tasklist.byId[id])
   }
@@ -41,5 +55,6 @@ const mergeProps = (stateProps, dispatchProps) => {
 export default connect(mapStateToProps, {
   fetchTasks,
   onDelete: destroyTask,
-  showModal
+  showModal,
+  onTaskEventReceive: taskEvent
 }, mergeProps)(TaskListContainer)

@@ -25,3 +25,12 @@ export const createTask = (props) =>
     body: {task: props},
     types: ['CREATE_TASK_REQUEST', 'CREATE_TASK_SUCCESS', 'CREATE_TASK_FAILURE']
   })
+
+export const taskEvent = ({ type, payload }) => {
+  if (type === 'UPDATE_TASK' || type === 'CREATE_TASK' || type === 'DELETE_TASK') {
+      return (dispatch, getState) => {
+        const currentUser = getState().auth.attributes.id
+        return dispatch({type, payload, meta: {currentUser}})
+      }
+  }
+}
