@@ -20,6 +20,8 @@ const byId = (state = {}, action) => {
       let copy = {...state}
       delete copy[action.meta]
       return copy
+    case 'UPDATE_TASK_SUCCESS':
+      return {...state, ...{[action.payload.id]: action.payload}}
     default:
       return state
   }

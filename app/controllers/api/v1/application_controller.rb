@@ -4,6 +4,7 @@ class Api::V1::ApplicationController < ActionController::Base
   before_action :authenticate_api_v1_user!
 
   respond_to :json
+  responders :json
 
   protected
 

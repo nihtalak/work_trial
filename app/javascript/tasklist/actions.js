@@ -11,3 +11,10 @@ export const destroyTask = (id) =>
     endpoint: `/api/v1/tasks/${id}`,
     types: ['DELETE_TASK_REQUEST', {type: 'DELETE_TASK_SUCCESS', meta: id}, 'DELETE_TASK_FAILURE']
   })
+
+export const updateTask = (id, props) =>
+  api.patch({
+    endpoint: `/api/v1/tasks/${id}`,
+    body: {task: props},
+    types: ['UPDATE_TASK_REQUEST', 'UPDATE_TASK_SUCCESS', 'UPDATE_TASK_FAILURE']
+  })

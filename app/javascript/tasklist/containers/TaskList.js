@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fetchTasks, destroyTask } from '../actions'
 import TaskList from '../components/TaskList'
+import { showModal, hideModal } from '../../modal/actions'
 
 class TaskListContainer extends React.Component {
   componentDidMount() {
@@ -9,12 +10,12 @@ class TaskListContainer extends React.Component {
   }
 
   render () {
-    const { loading, tasks, onDelete } = this.props
+    const { loading, tasks, onDelete, onShow } = this.props
 
     if (loading) {
       return <div className="loader center-block" />
     } else {
-      return <TaskList tasks={tasks} onDelete={onDelete} />
+      return <TaskList tasks={tasks} onDelete={onDelete} onShow={onShow} />
     }
   }
 }
@@ -26,4 +27,18 @@ const mapStateToProps = ({ tasklist }) => {
   }
 }
 
-export default connect(mapStateToProps, {fetchTasks, onDelete: destroyTask})(TaskListContainer)
+const mergeProps = (stateProps, dispatchProps) => {
+  return {
+    ...stateProps,
+    ...dispatchProps,
+    onShow: (task) => dispatchProps.showModal('SHOW_TASK', {
+      task: task
+    })
+  }
+}
+
+export default connect(mapStateToProps, {
+  fetchTasks,
+  onDelete: destroyTask,
+  showModal
+}, mergeProps)(TaskListContainer)

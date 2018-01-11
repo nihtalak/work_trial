@@ -7,6 +7,7 @@ import PrivateRoute from './PrivateRoute'
 import GuestRoute from './GuestRoute'
 import App from './App'
 import TaskListPage from '../tasklist/components/TaskListPage'
+import ModalRoot from '../modal/containers/ModalRoot'
 
 const Root = ({ store }) => (
   <Provider store={store}>
@@ -15,6 +16,7 @@ const Root = ({ store }) => (
       <GuestRoute path="/login" component={LoginPage} />
       <PrivateRoute component={TaskListPage} />
       </Switch>
+      <ModalRoot />
     </App>
   </Provider>
 )
