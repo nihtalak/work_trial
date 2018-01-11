@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchTasks } from '../actions'
+import { fetchTasks, destroyTask } from '../actions'
 import TaskList from '../components/TaskList'
 
 class TaskListContainer extends React.Component {
@@ -9,12 +9,12 @@ class TaskListContainer extends React.Component {
   }
 
   render () {
-    const { loading, tasks } = this.props
+    const { loading, tasks, onDelete } = this.props
 
     if (loading) {
       return <div className="loader center-block" />
     } else {
-      return <TaskList tasks={tasks} />
+      return <TaskList tasks={tasks} onDelete={onDelete} />
     }
   }
 }
@@ -26,4 +26,4 @@ const mapStateToProps = ({ tasklist }) => {
   }
 }
 
-export default connect(mapStateToProps, {fetchTasks})(TaskListContainer)
+export default connect(mapStateToProps, {fetchTasks, onDelete: destroyTask})(TaskListContainer)
