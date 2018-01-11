@@ -18,3 +18,10 @@ export const updateTask = (id, props) =>
     body: {task: props},
     types: ['UPDATE_TASK_REQUEST', 'UPDATE_TASK_SUCCESS', 'UPDATE_TASK_FAILURE']
   })
+
+export const createTask = (props) =>
+  api.post({
+    endpoint: `/api/v1/tasks`,
+    body: {task: props},
+    types: ['CREATE_TASK_REQUEST', 'CREATE_TASK_SUCCESS', 'CREATE_TASK_FAILURE']
+  })

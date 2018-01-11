@@ -79,3 +79,8 @@
     -webkit-transform: scaleY(1.0);
   }
 }
+
+.new-task-btn {
+  display: block;
+  margin-bottom: 3px;
+}

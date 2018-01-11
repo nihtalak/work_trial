@@ -21,6 +21,7 @@ const byId = (state = {}, action) => {
       delete copy[action.meta]
       return copy
     case 'UPDATE_TASK_SUCCESS':
+    case 'CREATE_TASK_SUCCESS':
       return {...state, ...{[action.payload.id]: action.payload}}
     default:
       return state
@@ -31,6 +32,8 @@ const ids = (state = [], action) => {
   switch (action.type) {
     case 'FETCH_TASKS_SUCCESS':
       return action.payload.map((t) => t.id)
+    case 'CREATE_TASK_SUCCESS':
+      return state.concat([action.payload.id])
     case 'DELETE_TASK_SUCCESS':
       return state.filter((id) => id != action.meta)
     default:

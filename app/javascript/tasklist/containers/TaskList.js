@@ -10,12 +10,12 @@ class TaskListContainer extends React.Component {
   }
 
   render () {
-    const { loading, tasks, onDelete, onShow } = this.props
+    const { loading, tasks, onDelete, onShow, onAdd } = this.props
 
     if (loading) {
       return <div className="loader center-block" />
     } else {
-      return <TaskList tasks={tasks} onDelete={onDelete} onShow={onShow} />
+      return <TaskList tasks={tasks} onDelete={onDelete} onShow={onShow} onAdd={onAdd} />
     }
   }
 }
@@ -33,7 +33,8 @@ const mergeProps = (stateProps, dispatchProps) => {
     ...dispatchProps,
     onShow: (task) => dispatchProps.showModal('SHOW_TASK', {
       task: task
-    })
+    }),
+    onAdd: (task) => dispatchProps.showModal('CREATE_TASK')
   }
 }
 
