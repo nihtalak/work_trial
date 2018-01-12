@@ -7,14 +7,14 @@ import Spinner from '../../global/Spinner'
 class TaskModal extends React.Component {
   constructor(props) {
     super()
-    this.state = {description: props.task.description, performer_id: props.task.performer.id}
+    this.state = {description: props.task.description, performer_id: props.task.performer.id, state: props.task.state}
   }
 
   handleChange = (field) => (e) => this.setState({[field]: e.target.value})
 
   render () {
     const { task, users, loadingUsers, onClose, onConfirm } = this.props
-    const { description, performer_id } = this.state
+    const { description, performer_id, state } = this.state
 
     return (
       <Modal onHide={onClose} show>
@@ -47,20 +47,23 @@ class TaskModal extends React.Component {
                 }
               </Col>
             </FormGroup>
+            <FormGroup controlId="state">
+              <Col componentClass={ControlLabel} sm={3}>
+                <span className="pull-right">State</span>
+              </Col>
+              <Col sm={9}>
+                <FormControl componentClass="select" value={state} onChange={this.handleChange('state')} required>
+                  <option value="opened">Opened</option>
+                  <option value="done">Done</option>
+                </FormControl>
+              </Col>
+            </FormGroup>
             <FormGroup controlId="owner">
               <Col componentClass="label" sm={3}>
                 <span className="pull-right">Owner</span>
               </Col>
               <Col sm={9}>
                 {task.owner.name}
-              </Col>
-            </FormGroup>
-            <FormGroup controlId="state">
-              <Col componentClass="label" sm={3}>
-                <span className="pull-right">State</span>
-              </Col>
-              <Col sm={9}>
-                {task.state}
               </Col>
             </FormGroup>
             <FormGroup controlId="createdAt">
